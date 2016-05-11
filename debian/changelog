@@ -1,0 +1,41 @@
+securityonion-squert-cron (20120722-0ubuntu0securityonion7) trusty; urgency=medium
+
+  * add cron option to force random delay 
+
+ -- Doug Burks <doug.burks@gmail.com>  Wed, 11 May 2016 07:59:21 -0400
+
+securityonion-squert-cron (20120722-0ubuntu0securityonion6) trusty; urgency=medium
+
+  * Squert ip2c cron job should run as a non-root user and sleep a random number of minutes 
+
+ -- Doug Burks <doug.burks@gmail.com>  Thu, 21 Apr 2016 06:17:50 -0400
+
+securityonion-squert-cron (20120722-0ubuntu0securityonion5) trusty; urgency=medium
+
+  * move squert to /var/www/so/squert 
+
+ -- Doug Burks <doug.burks@gmail.com>  Fri, 02 Oct 2015 16:18:43 -0400
+
+securityonion-squert-cron (20120722-0ubuntu0securityonion4) precise; urgency=low
+
+  * fix ip2c.tcl 
+
+ -- Doug Burks <doug.burks@gmail.com>  Sun, 13 Oct 2013 07:14:24 -0400
+
+securityonion-squert-cron (20120722-0ubuntu0securityonion3) precise; urgency=low
+
+  * re-enable ip2c.tcl job 
+
+ -- Doug Burks <doug.burks@gmail.com>  Sat, 12 Oct 2013 07:18:45 -0400
+
+securityonion-squert-cron (20120722-0ubuntu0securityonion2) precise; urgency=low
+
+  * update for Squert 1.1 
+
+ -- Doug Burks <doug.burks@gmail.com>  Thu, 22 Aug 2013 23:41:50 -0400
+
+securityonion-squert-cron (20120722-0ubuntu0securityonion1) precise; urgency=low
+
+  * Initial release
+
+ -- Doug Burks <doug.burks@gmail.com>  Tue, 10 Jul 2012 07:22:48 -0400

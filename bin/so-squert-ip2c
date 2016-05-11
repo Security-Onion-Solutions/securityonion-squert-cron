@@ -1,0 +1,71 @@
+#!/bin/bash
+#
+# Copyright (C) 2016 Doug Burks and Security Onion <doug.burks@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#########################################
+# Variables
+#########################################
+# What file should we log output to?
+LOG="/var/log/nsm/squert-ip2c.log"
+
+# Run squert-ip2c as IP2C_USER
+# Set directory and files to be owned by IP2C_USER:IP2C_GROUP
+IP2C_USER="sguil"
+IP2C_GROUP="sguil"
+
+# The values above can be overridden in securityonion.conf
+source /etc/nsm/securityonion.conf
+
+#########################################
+# Got r00t?
+#########################################
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "This program needs root privileges.  Please try again using sudo."
+    exit
+fi
+
+#########################################
+# Check to see if database exists and then run squert-ip2c
+#########################################
+if [ ! -d /var/lib/mysql/securityonion_db/ ]; then
+	echo "No Sguil database.  Exiting."
+	exit
+else
+	# Wipe existing LOG and insert date and a blank line
+	date > $LOG
+	echo >> $LOG
+
+        # If running from cron, pause for a random number of minutes (up to 50).
+        if [ $# -eq 1 ] && [ $1 == "cron" ]; then
+                RMIN=$(($(dd if=/dev/urandom count=1 2> /dev/null | cksum | cut -d' ' -f1) % 50));
+                echo "Sleeping for $RMIN minutes to avoid overwhelming sites." >> $LOG
+                sleep ${RMIN}m
+		date >> $LOG
+		echo >> $LOG
+        fi
+
+	# Set proper ownership on directory and files
+	DIR="/var/www/so/squert/.scripts"
+	[ -d $DIR ] && chown $IP2C_USER:$IP2C_GROUP $DIR
+	[ -f $DIR/results.txt ] && chown $IP2C_USER:$IP2C_GROUP $DIR/results.txt
+	for i in afrinic apnic arin lacnic ripencc; do
+		FILE=$DIR/delegated-$i-extended-latest_current.md5
+		[ -f $FILE ] && chown $IP2C_USER:$IP2C_GROUP $FILE
+	done
+	
+	# Run squert-ip2c as $IP2C_USER and log to $LOG
+	su - $IP2C_USER -c "cd /var/www/so/squert/.scripts/ && ./ip2c.tcl" >> $LOG 2>&1
+fi

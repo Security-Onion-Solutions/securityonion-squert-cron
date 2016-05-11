@@ -1,0 +1,33 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ securityonion-squert-cron (20120722-0ubuntu0securityonion2) precise; urgency=low
+ .
+   * update for Squert 1.1
+Author: Doug Burks <doug.burks@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- securityonion-squert-cron-20120722.orig/cron.d/squert-ip2c
++++ securityonion-squert-cron-20120722/cron.d/squert-ip2c
+@@ -6,4 +6,4 @@ SHELL=/bin/sh
+ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+ 
+ */5 * * * * root [ -d /var/lib/mysql/securityonion_db/ ] && /usr/bin/php -e /var/www/squert/.inc/ip2c.php 1 > /dev/null 2>&1
+-00 6 * * 0 root [ -d /var/lib/mysql/securityonion_db/ ] && (cd /var/www/squert/.scripts/Ip2c/ && rm -f -- *.md5 && ./ip2c.tcl > /dev/null 2>&1)
++# 00 6 * * 0 root [ -d /var/lib/mysql/securityonion_db/ ] && (cd /var/www/squert/.scripts/Ip2c/ && rm -f -- *.md5 && ./ip2c.tcl > /dev/null 2>&1)

@@ -1,0 +1,15 @@
+Source: securityonion-squert-cron
+Section: net
+Priority: extra
+Maintainer: Doug Burks <doug.burks@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://securityonionb.blogspot.com
+#Vcs-Git: git://git.debian.org/collab-maint/securityonion-squert-cron.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/securityonion-squert-cron.git;a=summary
+
+Package: securityonion-squert-cron
+Architecture: all
+Depends: ${misc:Depends}, securityonion-squert
+Description: This package installs the cron jobs for Squert.
+ /etc/cron.d/squert-ip2c
