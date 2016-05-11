@@ -19,7 +19,7 @@
 # Variables
 #########################################
 # What file should we log output to?
-LOG="/var/log/nsm/squert-ip2c.log"
+IP2C_LOG="/var/log/nsm/squert-ip2c.log"
 
 # Run squert-ip2c as IP2C_USER
 # Set directory and files to be owned by IP2C_USER:IP2C_GROUP
@@ -44,17 +44,17 @@ if [ ! -d /var/lib/mysql/securityonion_db/ ]; then
 	echo "No Sguil database.  Exiting."
 	exit
 else
-	# Wipe existing LOG and insert date and a blank line
-	date > $LOG
-	echo >> $LOG
+	# Wipe existing $IP2C_LOG and insert date and a blank line
+	date > $IP2C_LOG
+	echo >> $IP2C_LOG
 
         # If running from cron, pause for a random number of minutes (up to 50).
         if [ $# -eq 1 ] && [ $1 == "cron" ]; then
                 RMIN=$(($(dd if=/dev/urandom count=1 2> /dev/null | cksum | cut -d' ' -f1) % 50));
-                echo "Sleeping for $RMIN minutes to avoid overwhelming sites." >> $LOG
+                echo "Sleeping for $RMIN minutes to avoid overwhelming sites." >> $IP2C_LOG
                 sleep ${RMIN}m
-		date >> $LOG
-		echo >> $LOG
+		date >> $IP2C_LOG
+		echo >> $IP2C_LOG
         fi
 
 	# Set proper ownership on directory and files
@@ -66,6 +66,6 @@ else
 		[ -f $FILE ] && chown $IP2C_USER:$IP2C_GROUP $FILE
 	done
 	
-	# Run squert-ip2c as $IP2C_USER and log to $LOG
-	su - $IP2C_USER -c "cd /var/www/so/squert/.scripts/ && ./ip2c.tcl" >> $LOG 2>&1
+	# Run squert-ip2c as $IP2C_USER and log to $IP2C_LOG
+	su - $IP2C_USER -c "cd /var/www/so/squert/.scripts/ && ./ip2c.tcl" >> $IP2C_LOG 2>&1
 fi

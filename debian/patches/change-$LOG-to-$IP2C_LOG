@@ -1,0 +1,69 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ securityonion-squert-cron (20120722-0ubuntu0securityonion8) trusty; urgency=medium
+ .
+   * change $LOG to $IP2C_LOG
+Author: Doug Burks <doug.burks@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- securityonion-squert-cron-20120722.orig/bin/so-squert-ip2c
++++ securityonion-squert-cron-20120722/bin/so-squert-ip2c
+@@ -19,7 +19,7 @@
+ # Variables
+ #########################################
+ # What file should we log output to?
+-LOG="/var/log/nsm/squert-ip2c.log"
++IP2C_LOG="/var/log/nsm/squert-ip2c.log"
+ 
+ # Run squert-ip2c as IP2C_USER
+ # Set directory and files to be owned by IP2C_USER:IP2C_GROUP
+@@ -44,17 +44,17 @@ if [ ! -d /var/lib/mysql/securityonion_d
+ 	echo "No Sguil database.  Exiting."
+ 	exit
+ else
+-	# Wipe existing LOG and insert date and a blank line
+-	date > $LOG
+-	echo >> $LOG
++	# Wipe existing $IP2C_LOG and insert date and a blank line
++	date > $IP2C_LOG
++	echo >> $IP2C_LOG
+ 
+         # If running from cron, pause for a random number of minutes (up to 50).
+         if [ $# -eq 1 ] && [ $1 == "cron" ]; then
+                 RMIN=$(($(dd if=/dev/urandom count=1 2> /dev/null | cksum | cut -d' ' -f1) % 50));
+-                echo "Sleeping for $RMIN minutes to avoid overwhelming sites." >> $LOG
++                echo "Sleeping for $RMIN minutes to avoid overwhelming sites." >> $IP2C_LOG
+                 sleep ${RMIN}m
+-		date >> $LOG
+-		echo >> $LOG
++		date >> $IP2C_LOG
++		echo >> $IP2C_LOG
+         fi
+ 
+ 	# Set proper ownership on directory and files
+@@ -66,6 +66,6 @@ else
+ 		[ -f $FILE ] && chown $IP2C_USER:$IP2C_GROUP $FILE
+ 	done
+ 	
+-	# Run squert-ip2c as $IP2C_USER and log to $LOG
+-	su - $IP2C_USER -c "cd /var/www/so/squert/.scripts/ && ./ip2c.tcl" >> $LOG 2>&1
++	# Run squert-ip2c as $IP2C_USER and log to $IP2C_LOG
++	su - $IP2C_USER -c "cd /var/www/so/squert/.scripts/ && ./ip2c.tcl" >> $IP2C_LOG 2>&1
+ fi

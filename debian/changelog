@@ -1,3 +1,9 @@
+securityonion-squert-cron (20120722-0ubuntu0securityonion8) trusty; urgency=medium
+
+  * change $LOG to $IP2C_LOG
+
+ -- Doug Burks <doug.burks@gmail.com>  Wed, 11 May 2016 08:27:03 -0400
+
 securityonion-squert-cron (20120722-0ubuntu0securityonion7) trusty; urgency=medium
 
   * add cron option to force random delay 
