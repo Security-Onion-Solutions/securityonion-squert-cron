@@ -6,3 +6,4 @@ Squert-ip2c-cron-job-should-run-as-a-non-root-user-and-sleep-a-random-number-of-
 add-cron-option-to-force-random-delay
 upload-to-git
 change-$LOG-to-$IP2C_LOG
+random-cron-delay-should-be-at-least-10-minutes

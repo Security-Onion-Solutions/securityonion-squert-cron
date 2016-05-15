@@ -48,9 +48,10 @@ else
 	date > $IP2C_LOG
 	echo >> $IP2C_LOG
 
-        # If running from cron, pause for a random number of minutes (up to 50).
+        # If running from cron, pause for a random number of minutes (between 10 and 50).
         if [ $# -eq 1 ] && [ $1 == "cron" ]; then
-                RMIN=$(($(dd if=/dev/urandom count=1 2> /dev/null | cksum | cut -d' ' -f1) % 50));
+                RMIN=$(($(dd if=/dev/urandom count=1 2> /dev/null | cksum | cut -d' ' -f1) % 40));
+		let RMIN=RMIN+10
                 echo "Sleeping for $RMIN minutes to avoid overwhelming sites." >> $IP2C_LOG
                 sleep ${RMIN}m
 		date >> $IP2C_LOG
