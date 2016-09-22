@@ -1,3 +1,9 @@
+securityonion-squert-cron (20120722-0ubuntu0securityonion10) trusty; urgency=medium
+
+  * Issue 987: Squert ip2c cron job should lock to prevent multiple instances 
+
+ -- Doug Burks <doug.burks@gmail.com>  Thu, 22 Sep 2016 14:09:21 -0400
+
 securityonion-squert-cron (20120722-0ubuntu0securityonion9) trusty; urgency=medium
 
   * random cron delay should be at least 10 minutes 

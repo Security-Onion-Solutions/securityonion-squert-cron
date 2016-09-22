@@ -7,6 +7,7 @@ case "$1" in
 
 	# Make sure scripts are executable        
 	chmod +x /usr/bin/so-squert-ip2c || echo "Error making squert-ip2c executable."
+	chmod +x /usr/bin/so-squert-ip2c-5min || echo "Error making squert-ip2c-5min executable."
 
     ;;
 

@@ -7,3 +7,4 @@ add-cron-option-to-force-random-delay
 upload-to-git
 change-$LOG-to-$IP2C_LOG
 random-cron-delay-should-be-at-least-10-minutes
+Issue-987:-Squert-ip2c-cron-job-should-lock-to-prevent-multiple-instances
