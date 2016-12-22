@@ -1,3 +1,9 @@
+securityonion-squert-cron (20120722-0ubuntu0securityonion11) trusty; urgency=medium
+
+  * Move scripts from /usr/bin/ to /usr/sbin/ #1042 
+
+ -- Doug Burks <doug.burks@gmail.com>  Thu, 22 Dec 2016 15:07:51 -0500
+
 securityonion-squert-cron (20120722-0ubuntu0securityonion10) trusty; urgency=medium
 
   * Issue 987: Squert ip2c cron job should lock to prevent multiple instances 

@@ -1,2 +1,2 @@
 cron.d etc
-bin usr
+bin/* usr/sbin
